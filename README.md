@@ -8,7 +8,13 @@ I reverse engineered the code and found it out of date, so I wrote this module a
 
 ## Setup
 
-Just upload these files to the <HostBill-Installation-Directory>/includes/modules/Payment
+Just upload these files to the <HostBill-Installation-Directory>/includes/modules/Payment/alipay2
+
+Or execute following command in <HostBill-Installation-Directory>/includes/modules/Payment
+
+```
+git clone https://github.com/ym/alipay-hostbill.git alipay2
+```
 
 Login to Admin Panel on HostBill, then activate the payment module from Plugins section. Provide the required details for the module to work.
 
