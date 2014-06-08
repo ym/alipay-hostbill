@@ -14,6 +14,8 @@ Or execute following command in <HostBill-Installation-Directory>/includes/modul
 
 ```
 git clone https://github.com/ym/alipay-hostbill.git alipay2
+cd alipay2
+git checkout tags/1.4
 ```
 
 Login to Admin Panel on HostBill, then activate the payment module from Plugins section. Provide the required details for the module to work.
