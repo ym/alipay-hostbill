@@ -1,8 +1,8 @@
 <?php
-class Alipay extends PaymentModule {
-	protected $version = '1.2';
+class Alipay2 extends PaymentModule {
+	protected $version = '1.3';
 	protected $supportedCurrencies = array( 0 => 'CNY' );
-	protected $description = 'AliPay Payment Gateway';
+	protected $description = 'AliPay Payment Gateway by Aveline';
 	protected $lang = array(
 		'english' => array(
 			'Alipayseller_email'  => 'Seller Email',
@@ -65,8 +65,8 @@ class Alipay extends PaymentModule {
 		if (strrpos($url, '/') !== strlen($url) - 1) {
 			$url .= '/';
 		}
-		$this->callback_url = Utilities::checkSecureUrl($url . 'includes/modules/Payment/callback/alipay_callback.php');
-		$this->return_url   = Utilities::checkSecureUrl($url . 'includes/modules/Payment/callback/alipay_return.php');
+		$this->callback_url = Utilities::checkSecureUrl($url . 'includes/modules/Payment/callback/alipay2_callback.php');
+		$this->return_url   = Utilities::checkSecureUrl($url . 'includes/modules/Payment/callback/alipay2_return.php');
 	}
 
 	protected function arg_sort($parameters) {
