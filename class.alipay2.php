@@ -8,13 +8,15 @@ class Alipay2 extends PaymentModule {
 			'Alipay2seller_email'  => 'Seller Email',
 			'Alipay2security_code' => 'Security Code',
 			'Alipay2partner'       => 'Partner',
-			'Alipay2service'       => 'Service Type'
+			'Alipay2service'       => 'Service Type',
+			'Alipay2namespace'     => 'Namespace'
 		),
 		'chinese' => array(
 			'Alipay2seller_email'  => '卖家 E-mail',
 			'Alipay2security_code' => '安全校验码',
 			'Alipay2partner'       => '合作者身份',
-			'Alipay2service'       => '服务类型'
+			'Alipay2service'       => '服务类型',
+			'Alipay2namespace'     => '命名空间'
 		)
 	);
 	protected $configuration = array(
@@ -40,6 +42,10 @@ class Alipay2 extends PaymentModule {
 			)
 		),
 		'agent' => array(
+			'value' => '',
+			'type'  => 'input'
+		),
+		'namespace' => array(
 			'value' => '',
 			'type'  => 'input'
 		)
@@ -97,6 +103,14 @@ class Alipay2 extends PaymentModule {
 
 	protected function escape_id($str) {
 		return str_replace(array( '#', ' ', '-' ), '', $str);
+	}
+
+	protected function encode_id($str) {
+		return dechex(hexdec(bin2hex($this->configuration['security_code']['value'])) + hexdec(bin2hex($str)));
+	}
+
+	protected function decode_id($str) {
+		return hex2bin(dechex(hexdec($str) - hexdec(bin2hex($this->configuration['security_code']['value']))));
 	}
 
 	protected function build_request_signature($parameters) {
@@ -184,7 +198,7 @@ class Alipay2 extends PaymentModule {
 			'notify_url'     => $this->callback_url,
 			'return_url'     => $this->return_url,
 			'price'          => $this->amount,
-			'out_trade_no'   => '0' . $this->invoice_id,
+			'out_trade_no'   => $this->encode_id($this->invoice_id),
 			'payment_type'   => '1',
 			'quantity'       => '1',
 		);
@@ -237,7 +251,7 @@ class Alipay2 extends PaymentModule {
 			switch ($_GET['ali_type_r']) {
 			case 'return': {
 					$status        = $_GET['trade_status'];
-					$invoice_id    = substr($_GET['out_trade_no'], 1);
+					$invoice_id    = $this->decode_id($_GET['out_trade_no']);
 					$description   = (isset($_GET['subject']) ? $_GET['subject'] : '');
 					$in            = $_GET['total_fee'];
 					$transid       = $_GET['trade_no'];
@@ -246,7 +260,7 @@ class Alipay2 extends PaymentModule {
 
 			case 'callback': {
 					$status        = $_POST['trade_status'];
-					$invoice_id    = substr($_POST['out_trade_no'], 1 );
+					$invoice_id    = $this->decode_id($_POST['out_trade_no']);
 					$description   = isset($_POST['subject']) ? $_POST['subject'] : '';
 					$in            = $_POST['total_fee'];
 					$transid       = $_POST['trade_no'];
