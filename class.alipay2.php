@@ -65,8 +65,8 @@ class Alipay2 extends PaymentModule {
 		if (strrpos($url, '/') !== strlen($url) - 1) {
 			$url .= '/';
 		}
-		$this->callback_url = Utilities::checkSecureUrl($url . 'includes/modules/Payment/callback/alipay2_callback.php');
-		$this->return_url   = Utilities::checkSecureUrl($url . 'includes/modules/Payment/callback/alipay2_return.php');
+		$this->callback_url = Utilities::checkSecureUrl($url . 'includes/modules/Payment/alipay2/callback/callback.php');
+		$this->return_url   = Utilities::checkSecureUrl($url . 'includes/modules/Payment/alipay2/callback/return.php');
 	}
 
 	protected function arg_sort($parameters) {
