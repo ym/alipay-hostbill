@@ -108,11 +108,11 @@ class Alipay2 extends PaymentModule {
 	}
 
 	protected function encode_id($str) {
-		return dechex(hexdec(bin2hex($this->configuration['security_code']['value'])) + hexdec(bin2hex($str)));
+		return dechex(hexdec(bin2hex($this->configuration['namespace']['value'])) + hexdec(bin2hex($str)));
 	}
 
 	protected function decode_id($str) {
-		return hex2bin(dechex(hexdec($str) - hexdec(bin2hex($this->configuration['security_code']['value']))));
+		return hex2bin(dechex(hexdec($str) - hexdec(bin2hex($this->configuration['namespace']['value']))));
 	}
 
 	protected function build_request_signature($parameters) {
