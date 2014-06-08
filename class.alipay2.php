@@ -5,16 +5,16 @@ class Alipay2 extends PaymentModule {
 	protected $description = 'AliPay Payment Gateway by Aveline';
 	protected $lang = array(
 		'english' => array(
-			'Alipayseller_email'  => 'Seller Email',
-			'Alipaysecurity_code' => 'Security Code',
-			'Alipaypartner'       => 'Partner',
-			'Alipayservice'       => 'Service Type'
+			'Alipay2seller_email'  => 'Seller Email',
+			'Alipay2security_code' => 'Security Code',
+			'Alipay2partner'       => 'Partner',
+			'Alipay2service'       => 'Service Type'
 		),
 		'chinese' => array(
-			'Alipayseller_email'  => '卖家 E-mail',
-			'Alipaysecurity_code' => '安全校验码',
-			'Alipaypartner'       => '合作者身份',
-			'Alipayservice'       => '服务类型'
+			'Alipay2seller_email'  => '卖家 E-mail',
+			'Alipay2security_code' => '安全校验码',
+			'Alipay2partner'       => '合作者身份',
+			'Alipay2service'       => '服务类型'
 		)
 	);
 	protected $configuration = array(
